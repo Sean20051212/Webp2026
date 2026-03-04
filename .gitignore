@@ -1,0 +1,14 @@
+# Python 虛擬環境
+myenv/
+venv/
+ENV/
+
+# Django 自動生成的檔案
+db.sqlite3
+debug.log
+__pycache__/
+*.py[cod]
+
+# 作業系統暫存檔
+.DS_Store
+Thumbs.db
