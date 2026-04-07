@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sean20051212 | Portfolio</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --accent: #e8ff47;
+      --dark: #0d0d0d;
+      --mid: #1a1a1a;
+      --light: #f5f5f0;
+      --muted: #888;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .display-font {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #222;
+    }
+    .navbar-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--accent) !important;
+      letter-spacing: -0.5px;
+    }
+    .nav-link {
+      color: var(--muted) !important;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--light) !important; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0 80px;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-name {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      font-style: italic;
+      margin: 1.5rem 0 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: var(--dark);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,255,71,0.3);
+      color: var(--dark);
+    }
+    .btn-outline-light-custom {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid #444;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-light-custom:hover {
+      border-color: var(--light);
+      color: var(--light);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--muted); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    /* ── Section common ── */
+    section { padding: 100px 0; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 2rem; }
+
+    /* ── About ── */
+    #about { background: var(--mid); }
+    .about-img-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px -8px 8px 8px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      z-index: 0;
+    }
+    .about-img {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 4px;
+      position: relative;
+      z-index: 1;
+      background: #2a2a2a;
+      aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      color: #444;
+    }
+    .stat-box {
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 20px 24px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .stat-box:hover { border-color: var(--accent); }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── Skills ── */
+    #skills { background: var(--dark); }
+    .skill-card {
+      background: var(--mid);
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 28px;
+      height: 100%;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .skill-icon {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .skill-card h5 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+    .skill-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .skill-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid #333;
+      color: var(--muted);
+      margin: 3px 2px;
+    }
+
+    /* ── Projects ── */
+    #projects { background: var(--mid); }
+    .project-card {
+      background: var(--dark);
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 100%;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .project-thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    }
+    .project-body { padding: 24px; }
+    .project-body h5 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .project-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .project-link {
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .project-link:hover { text-decoration: underline; color: var(--accent); }
+
+    /* ── Contact ── */
+    #contact { background: var(--dark); }
+    .contact-box {
+      background: var(--mid);
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 48px;
+    }
+    .contact-input {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      color: var(--light);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      width: 100%;
+      transition: border-color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .contact-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: #111;
+    }
+    .contact-input::placeholder { color: #555; }
+    label { font-size: 0.8rem; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 6px; display: block; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 32px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── Social Icons ── */
+    .social-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px;
+      border: 1px solid #333;
+      border-radius: 50%;
+      color: var(--muted);
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      margin: 0 6px;
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 768px) {
+      section { padding: 70px 0; }
+      .contact-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Sean.</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+        <span style="color:var(--light);font-size:1.4rem;"><i class="bi bi-list"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div class="hero-tag">Available for opportunities</div>
+          <h1 class="hero-name">Sean<br><span>20051212</span></h1>
+          <p class="hero-sub">Web Developer &amp; Creative Thinker</p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn-accent">View My Work</a>
+            <a href="#contact" class="btn-outline-light-custom text-decoration-none">Contact Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <i class="bi bi-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 text-center text-lg-start">
+          <div class="about-img-wrap d-inline-block">
+            <div class="about-img">
+              <i class="bi bi-person-fill"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Hi, I'm Sean<span style="color:var(--accent)">.</span></h2>
+          <div class="divider"></div>
+          <p style="color:var(--muted);line-height:1.8;margin-bottom:1.5rem;">
+            I'm a passionate web developer with a love for clean, functional design.
+            I enjoy turning ideas into real digital experiences — from simple landing pages
+            to complex interactive systems. Always learning, always building.
+          </p>
+          <p style="color:var(--muted);line-height:1.8;margin-bottom:2rem;">
+            When I'm not coding, you can find me exploring new tech trends,
+            playing around with UI experiments, or brewing the perfect cup of coffee ☕
+          </p>
+          <div class="row g-3">
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-num">10+</div>
+                <div class="stat-label">Projects Done</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-num">3+</div>
+                <div class="stat-label">Years Learning</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-box">
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Cups of Coffee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-label">What I Do</div>
+        <h2 class="section-title">Skills &amp; Tools</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-code-slash"></i></div>
+            <h5>Frontend Development</h5>
+            <p>Building responsive, accessible, and performant web interfaces with modern web technologies.</p>
+            <div class="mt-3">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-server"></i></div>
+            <h5>Backend Basics</h5>
+            <p>Familiar with server-side concepts, RESTful APIs, and database fundamentals.</p>
+            <div class="mt-3">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">REST API</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-phone"></i></div>
+            <h5>Responsive Design</h5>
+            <p>Crafting layouts that look great on every screen size — mobile, tablet, and desktop.</p>
+            <div class="mt-3">
+              <span class="skill-tag">RWD</span>
+              <span class="skill-tag">Flexbox</span>
+              <span class="skill-tag">CSS Grid</span>
+              <span class="skill-tag">Media Queries</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-git"></i></div>
+            <h5>Version Control</h5>
+            <p>Using Git and GitHub to manage code, collaborate, and deploy projects efficiently.</p>
+            <div class="mt-3">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">GitHub Pages</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-palette"></i></div>
+            <h5>UI / UX Sense</h5>
+            <p>Caring about user experience, visual hierarchy, and the small details that make a big difference.</p>
+            <div class="mt-3">
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Wireframing</span>
+              <span class="skill-tag">Prototyping</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="bi bi-robot"></i></div>
+            <h5>AI &amp; Automation</h5>
+            <p>Exploring AI APIs, workflow automation tools, and smart integrations in everyday projects.</p>
+            <div class="mt-3">
+              <span class="skill-tag">Claude API</span>
+              <span class="skill-tag">Make.com</span>
+              <span class="skill-tag">Discord Bots</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-label">My Work</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <div class="project-thumb">🤖</div>
+            <div class="project-body">
+              <h5>Discord Productivity Bot</h5>
+              <p>A Discord bot that classifies messages with AI and automatically routes them to the right Notion database.</p>
+              <div class="mt-3">
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Claude API</span>
+                <span class="skill-tag">Notion</span>
+              </div>
+              <div class="mt-3">
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <div class="project-thumb">🌐</div>
+            <div class="project-body">
+              <h5>Personal Portfolio</h5>
+              <p>This very site — a responsive Bootstrap portfolio with smooth scrolling, animations, and a clean dark theme.</p>
+              <div class="mt-3">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">Bootstrap 5</span>
+                <span class="skill-tag">CSS3</span>
+              </div>
+              <div class="mt-3">
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card">
+            <div class="project-thumb">📊</div>
+            <div class="project-body">
+              <h5>Data Dashboard</h5>
+              <p>A web dashboard that visualizes data from APIs with interactive charts and a responsive layout.</p>
+              <div class="mt-3">
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Chart.js</span>
+                <span class="skill-tag">REST API</span>
+              </div>
+              <div class="mt-3">
+                <a href="#" class="project-link">View Project →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-label">Get In Touch</div>
+        <h2 class="section-title">Contact Me</h2>
+        <div class="divider mx-auto"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="contact-box">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label>Name</label>
+                <input type="text" class="contact-input" placeholder="Your name" />
+              </div>
+              <div class="col-md-6">
+                <label>Email</label>
+                <input type="email" class="contact-input" placeholder="your@email.com" />
+              </div>
+              <div class="col-12">
+                <label>Subject</label>
+                <input type="text" class="contact-input" placeholder="What's this about?" />
+              </div>
+              <div class="col-12">
+                <label>Message</label>
+                <textarea class="contact-input" rows="5" placeholder="Tell me more..."></textarea>
+              </div>
+              <div class="col-12 text-center">
+                <button class="btn-accent" style="cursor:pointer;font-size:0.95rem;padding:16px 48px;">
+                  Send Message <i class="bi bi-send ms-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="mb-3">
+        <a href="https://github.com/Sean20051212" target="_blank" class="social-link"><i class="bi bi-github"></i></a>
+        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="social-link"><i class="bi bi-envelope"></i></a>
+      </div>
+      <p>© 2026 <span>Sean20051212</span>. Built with Bootstrap 5 &amp; ❤️</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.skill-card, .project-card, .stat-box').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+
+    // Active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      document.querySelectorAll('.nav-link').forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? '#f5f5f0' : '';
+      });
+    });
+  </script>
+</body>
+</html>
